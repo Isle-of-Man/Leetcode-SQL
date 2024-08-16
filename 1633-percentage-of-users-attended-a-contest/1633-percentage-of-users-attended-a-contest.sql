@@ -1,8 +1,10 @@
 # Write your MySQL query statement below
 
 
-select contest_id , round((count(distinct(user_id)) / (SELECT COUNT(user_id) FROM Users))*100,2) AS percentage
-from Register r 
+select contest_id , round((count(distinct(r.user_id)) / (SELECT COUNT(*) FROM Users))*100,2) AS percentage
+from Users u 
+ JOIN Register r 
+ON u.user_id = r.user_id 
 group by contest_id 
 order by percentage DESC , contest_id 
 
